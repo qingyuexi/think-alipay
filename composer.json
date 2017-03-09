@@ -1,0 +1,26 @@
+{
+    "name":             "qingyuexi/think-addons",
+    "description":      "addons package for thinkphp5",
+    "keywords":         ["alipay", "think-alipay", "tp5-alipay","qingyuexi-alipay","thinkphp5"],
+    "homepage": 		"https://github.com/qingyuexi/think-alipay",
+    "license": 			"Apache-2.0",
+    "minimum-stability": "stable",
+    "version": "1.0.0",
+    "authors": [{
+        "name":         "qingyuexi",
+        "email":        "1604583867@qq.com",
+        "homepage":     "http://www.youtellme.cc",
+        "role":         "Engineer"
+    }],
+    "support": {
+        "issues": "https://github.com/qingyuexi/think-alipay/issues"
+    },
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "Alipay": "Classes/"
+        }
+    }
+}
