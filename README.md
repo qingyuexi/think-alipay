@@ -80,7 +80,7 @@ class PayController extends BaseController
     public function alipay()
     {
         $id = input('param.id');
-        $order = model('Order')->with('user,contact,delivery,detail.product.file')->find($id);
+        $order = model('Order')->with('user')->find($id);
 
         Vendor("qingyuexi.Alipay.Alipay");
 
@@ -93,8 +93,7 @@ class PayController extends BaseController
         $exter_invoke_ip = "";
 
         /************************************************************/
-        // $is_mobile = request()->isMobile() ? true :false;
-        $is_mobile = true;
+        $is_mobile = request()->isMobile() ? true :false;
         
         $alipay_config = $this->alipayInit();
         $alipay = new \Alipay($alipay_config, $is_mobile);
