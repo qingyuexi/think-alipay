@@ -137,9 +137,15 @@ class PayController extends BaseController
     {
         
         Vendor("qingyuexi.Alipay.Alipay");
-        
+        if(isset($_POST['notify_data'])){
+            //手机支付
+            $is_mobile = true;
+        }else{
+            //网页支付
+            $is_mobile = false;
+        }
         $alipay_config = $this->alipayInit();
-        $alipay = new \Alipay($alipay_config, true);
+        $alipay = new \Alipay($alipay_config, $is_mobile);
         $verify_result = $alipay->verifyCallback();
 
         if ($verify_result) {//验证成功
@@ -148,7 +154,9 @@ class PayController extends BaseController
             //——请根据您的业务逻辑来编写程序（以下代码仅作参考）——
 
             //获取支付宝的通知返回参数，可参考技术文档中服务器异步通知参数列表
-            $_POST = simplest_xml_to_array($_POST['notify_data']);
+            if(isset($_POST['notify_data'])){
+                $_POST = simplest_xml_to_array($_POST['notify_data']);
+            }
             //商户订单号
             $out_trade_no = $_POST['out_trade_no'];
             //支付宝交易号
@@ -198,6 +206,16 @@ class PayController extends BaseController
         }
     }
 }
+/**
+ * 最简单的XML转数组
+ * @param string $xmlstring XML字符串
+ * @return array XML数组
+ */
+function simplest_xml_to_array($xmlstring)
+{
+    return json_decode(json_encode((array)simplexml_load_string($xmlstring)), true);
+}
+
 ```
 
 

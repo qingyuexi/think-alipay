@@ -118,8 +118,12 @@ class Alipay
         
         $signValid = $this->verifyParameters($data, $data["sign"]);
 
-        $notify_data = simplest_xml_to_array($_POST['notify_data']);
-        $notify_id = $notify_data['notify_id'];
+        if(isset($_POST['notify_data'])){
+            $notify_data = simplest_xml_to_array($_POST['notify_data']);
+            $notify_id = $notify_data['notify_id'];
+        }else{
+            $notify_id = $data['notify_id'];
+        }
 
         if ($async && $this->is_mobile) {
             
